@@ -1,9 +1,38 @@
 spring:
-  data:
-    mongodb:
-        authentication-database: admin
-        username: rootuser
-        password: rootpass
-        database: todoapp
-        port: 27017
-        host: localhost
+    profiles:
+        active: dev
+    data:
+        mongodb:
+            authentication-database: admin
+            username: rootuser
+            password: rootpass
+            database: todoapp
+            port: 27017
+            host: localhost
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+                exclude: loggers
+    endpoint:
+        shutdown:
+            enabled: true
+    info:
+        git:
+            enabled: true
+            mode: simple
+
+info:
+    app:
+        name: @project.name@
+        groupId: @project.groupId@
+        artifactId: @project.artifactId@
+        version: @project.version@
+
+springdoc:
+    packages-to-scan: com.tardin.todo_app
+    paths-to-match: /api/v1/**
+    swagger-ui:
+        path: /api/v1/docs
